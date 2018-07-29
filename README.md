@@ -4,9 +4,12 @@ A python code that uses the Raspberry Pi to make a photo booth
 Run the following commands in the terminal:
 
 `sudo apt-get update`
+
 `sudo apt-get upgrade`
 
+
 `pip3 install tweepy`
+
 `pip3 install picamera`
 
 Connect a buzzer to pin 3
