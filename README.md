@@ -8,6 +8,11 @@ Run the following commands in the terminal:
 `sudo apt-get upgrade`
 
 
+`git clone https://github.com/sampdubs/PiCam.git`
+
+`cd PiCam/`
+
+
 `pip3 install tweepy`
 
 `pip3 install picamera`
@@ -32,3 +37,7 @@ Enter your email password
 * Connect a button to pin 4
 
 * Plug a camera module into the camera port (blue side facing the ethernet port)
+
+* Edit picam.py so that you use your own email adress and Twitter information
+
+`python3 picam.py`
