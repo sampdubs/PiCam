@@ -46,7 +46,7 @@ def main():
         pwd = open('passwords.txt').read()
         eobj.ehlo()
         eobj.starttls()
-        eobj.login('sammypw1@gmail.com', pwd)
+        eobj.login('YOUR_EMAIL_HERE', pwd)
         while '@' not in recipients or ',' in recipients:
             recipients = input('Please enter the email adress(es) that you would like the pictures to be sent to (separated by spaces, no commas): ')
         recipients = ', '.join(recipients.split())
@@ -60,7 +60,7 @@ def main():
         burst = input('Would you like to take a burst (alternative is 3 seconds in between pictures to change pose)? [y/n] ')
     burst = burst[0].lower() == 'y'
 
-    imgnum = 5
+    imgnum = None
     while imgnum not in ['1', '2', '3', '4']:
         imgnum = input('How many pictures would you like to take (min 1, max 4)? ')
     imgnum = int(imgnum)
@@ -114,7 +114,7 @@ def main():
     if postOn == TWITTER or postOn == BOTH:
         print('Please be patient while your photos are uploaded to Twitter')
         
-        api_key, api_secret, access_token, access_token_secret = 'V1cYqKOMYXCeQlm9AFWEAzt23', 'KThLGcJBLkWc7Q5UdcJnK9UVBn5fwKmadKYjexS5it7dBOin74', '1022176894219894784-V43usR6NksybMVPxZMpK2W4YzizY0H', 'znONzJv6nHBEitFSvZjQU6JO5lCpuTKRqgu7n4ajT3tcV'
+        api_key, api_secret, access_token, access_token_secret = 'YOUR_API_KEY', 'YOUR_API_SECRET', 'YOUR_ACCESS_TOKEN', 'YOUR_ACCESS_TOKEN_SECRET'
 
         auth = tweepy.OAuthHandler(api_key, api_secret)
         auth.set_access_token(access_token, access_token_secret)
@@ -126,12 +126,12 @@ def main():
         for file in filenames:
             media_ids.append(api.media_upload(file).media_id)
 
-        api.update_status(status='Photos from Sam P-W\'s PiCam taken by {}! #PiCamp'.format(handle), media_ids=media_ids)
+        api.update_status(status='Photos from YOUR_NAME\'s PiCam taken by {}! #PiCamp'.format(handle), media_ids=media_ids)
         cdown = list(range(11))
         cdown.reverse()
         for i in cdown:
             system('clear')
-            print('Hold control and click this link in the next {} seconds to see your pics:\nhttps://twitter.com/samppdubs'.format(i))
+            print('Hold control and click this link in the next {} seconds to see your pics:\nhttps://twitter.com/YOUR_TWITTER_HANDLE'.format(i))
             sleep(1)
 
 while True:
