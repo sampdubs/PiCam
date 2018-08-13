@@ -12,4 +12,4 @@ data['password'] = input('What is your email password?')
 data['name'] = input('What is your name?')
 
 with open('config.json', 'w') as f:
-  json.dumps(data, sort_keys=True, indent=2)
+  write(json.dumps(data, sort_keys=True, indent=2))
