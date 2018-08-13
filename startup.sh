@@ -6,4 +6,5 @@ sudo apt-get upgrade
 sudo apt-install jq
 pip3 install -r requirements.txt
 mkdir images
-touch passwords.txt
+touch config.json
+python3 info.py
