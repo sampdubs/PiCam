@@ -7,3 +7,4 @@ sudo apt-install jq
 pip3 install -r requirements.txt
 mkdir images
 python3 info.py
+python3 picam.py
