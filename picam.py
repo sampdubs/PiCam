@@ -8,6 +8,7 @@ import smtplib as email
 from picamera import PiCamera
 from gpiozero import Button, Buzzer
 from time import sleep
+import json
 print('Done :)')
 sleep(0.75)
 system('clear')
@@ -19,6 +20,7 @@ cam = PiCamera()
 TWITTER = 1
 EMAIL = 2
 BOTH = 3
+CONFIG = json.loads(open('config.json').read())
 
 def main():
     system('clear')
@@ -46,7 +48,7 @@ def main():
         pwd = open('passwords.txt').read()
         eobj.ehlo()
         eobj.starttls()
-        eobj.login('YOUR_EMAIL_HERE', pwd)
+        eobj.login(CONFIG['email'], pwd)
         while '@' not in recipients or ',' in recipients:
             recipients = input('Please enter the email adress(es) that you would like the pictures to be sent to (separated by spaces, no commas): ')
         recipients = ', '.join(recipients.split())
@@ -114,7 +116,7 @@ def main():
     if postOn == TWITTER or postOn == BOTH:
         print('Please be patient while your photos are uploaded to Twitter')
         
-        api_key, api_secret, access_token, access_token_secret = 'YOUR_API_KEY', 'YOUR_API_SECRET', 'YOUR_ACCESS_TOKEN', 'YOUR_ACCESS_TOKEN_SECRET'
+        api_key, api_secret, access_token, access_token_secret = CONFIG['api_key'], CONFIG['api_secret'], CONFIG['access_token'], CONFIG['access_token_secret']
 
         auth = tweepy.OAuthHandler(api_key, api_secret)
         auth.set_access_token(access_token, access_token_secret)
@@ -126,12 +128,12 @@ def main():
         for file in filenames:
             media_ids.append(api.media_upload(file).media_id)
 
-        api.update_status(status='Photos from YOUR_NAME\'s PiCam taken by {}! #PiCamp'.format(handle), media_ids=media_ids)
+        api.update_status(status='Photos from {}\'s PiCam taken by {}! #PiCamp'.format(CONFIG['name'], handle), media_ids=media_ids)
         cdown = list(range(11))
         cdown.reverse()
         for i in cdown:
             system('clear')
-            print('Hold control and click this link in the next {} seconds to see your pics:\nhttps://twitter.com/YOUR_TWITTER_HANDLE'.format(i))
+            print('Hold control and click this link in the next {} seconds to see your pics:\nhttps://twitter.com/{}'.format(i, CONFIG['twitter_handle']))
             sleep(1)
 
 while True:
